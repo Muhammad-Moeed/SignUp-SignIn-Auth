@@ -16,7 +16,7 @@ signupBtn.addEventListener('click', async (e) => {
         })
         if (error) throw error
         if (data) {
-            alert('Please check your email for confirmation')
+            Swal.fire('Success', 'Please check your email for confirmation', 'success');
             // console.log(alert)
         }
         signupUsername.value = ''
@@ -39,7 +39,17 @@ loginBtn.addEventListener('click', async (e) => {
        })
        if (error) throw error
        if (data) {
-           alert('Sign Sucesfully')
+         if (!loginEmail) {
+      swal("Error!", "Invalid email!", "error");
+    } else if (!loginPassword) {
+      swal("Error!", "Invalid password!", "error");
+    } else {
+        swal({
+            title: "Success!",
+            text: "Login successful!",
+            icon: "success",
+            button: "OK",
+          })
            // console.log(alert)
        }
        signupUsername.value = ''
@@ -47,7 +57,7 @@ loginBtn.addEventListener('click', async (e) => {
        signupPassword.value = ''
        return data
        
-   } catch (error) {
+   } }catch (error) {
        console.log(error)
    }
    
