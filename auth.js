@@ -7,6 +7,9 @@ const loginEmail = document.querySelector('#loginEmail');
 const loginPassword = document.querySelector('#loginPassword');
 const loginBtn = document.querySelector('#loginBtn');
 
+
+// *****************Signup Auth *******************
+
 signupBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     try {
@@ -28,6 +31,8 @@ signupBtn.addEventListener('click', async (e) => {
         Swal.fire('Error', 'Signup failed. Please try again.', 'error');
     }
 });
+
+// *****************Login Auth *******************
 
 loginBtn.addEventListener('click', async (e) => {
     e.preventDefault();
@@ -59,3 +64,26 @@ loginBtn.addEventListener('click', async (e) => {
         Swal.fire('Error', 'An unexpected error occurred', 'error');
     }
 });
+
+
+// ******************Google Auth **********************
+
+const googleLoginBtn = document.getElementById('google-signin');
+
+async function signInWithGoogle() {
+    try {
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: 'https://myawesomeapp.netlify.app/success.html' 
+            }
+        });
+
+        if (error) throw error;
+        console.log('Redirecting to Google login...');
+    } catch (error) {
+        console.error('Error during Google sign-in:', error.message);
+    }
+}
+
+googleLoginBtn.addEventListener('click', signInWithGoogle);
