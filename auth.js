@@ -75,7 +75,7 @@ async function signInWithGoogle() {
         const { error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: 'https://authinticationform.netlify.app/success.html' 
+                redirectTo: 'redirect_uri: "http://localhost:3000/dashboard.html'
             }
         });
 
