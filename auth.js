@@ -14,11 +14,15 @@ signupBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     try {
         const { data, error } = await supabase.auth.signUp({
+            username : username.value,
             email: signupEmail.value,
             password: signupPassword.value,
         });
         if (error) throw error;
         if (data) {
+            await supabase.from('profiles').insert([
+                { user_id: data.user.id, username: username }
+            ]);
             Swal.fire('Success', 'Please check your email for confirmation', 'success');
         }
         signupUsername.value = '';
