@@ -51,20 +51,27 @@ loginBtn.addEventListener('click', async (e) => {
             email: loginEmail.value,
             password: loginPassword.value,
         });
+
         if (error) {
             Swal.fire('Error', 'Invalid credentials, please try again', 'error');
         } else {
-            Swal.fire('Success', 'Login successful!', 'success');
-           
+            Swal.fire({
+                icon: 'success',
+                title: 'Login successful! ✅ ',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(() => {
+                window.location.href = 'dashboard.html'; 
+            });
         }
+
         return data;
-        
+
     } catch (error) {
         console.log(error);
         Swal.fire('Error', 'An unexpected error occurred', 'error');
     }
 });
-
 
 // ******************Google Auth **********************
 
