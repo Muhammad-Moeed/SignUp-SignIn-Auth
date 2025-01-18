@@ -14,15 +14,11 @@ signupBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     try {
         const { data, error } = await supabase.auth.signUp({
-            username : username.value,
             email: signupEmail.value,
             password: signupPassword.value,
         });
         if (error) throw error;
         if (data) {
-            await supabase.from('profiles').insert([
-                { user_id: data.user.id, username: username }
-            ]);
             Swal.fire('Success', 'Please check your email for confirmation', 'success');
         }
         signupUsername.value = '';
@@ -55,27 +51,20 @@ loginBtn.addEventListener('click', async (e) => {
             email: loginEmail.value,
             password: loginPassword.value,
         });
-
         if (error) {
             Swal.fire('Error', 'Invalid credentials, please try again', 'error');
         } else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Login successful! ✅ ',
-                showConfirmButton: false,
-                timer: 1500
-            }).then(() => {
-                window.location.href = 'dashboard.html'; 
-            });
+            Swal.fire('Success', 'Login successful!', 'success');
+           
         }
-
         return data;
-
+        
     } catch (error) {
         console.log(error);
         Swal.fire('Error', 'An unexpected error occurred', 'error');
     }
 });
+
 
 // ******************Google Auth **********************
 
